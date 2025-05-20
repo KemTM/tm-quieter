@@ -87,7 +87,10 @@ void RenderSounds() {
 
                 UI::TableNextColumn();
                 UI::SetNextItemWidth(UI::GetContentRegionAvail().x / scale);
-                sound.volume = UI::SliderFloat("##slider" + i, sound.volume, -60.0f, 20.0f);
+                const float volume = UI::SliderFloat("##slider" + i, sound.volume, -60.0f, 20.0f);
+                if (sound.volume != volume) {
+                    sound.volume = volume;
+                }
 
                 UI::EndDisabled();
             }
