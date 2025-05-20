@@ -1,9 +1,9 @@
 ![Signed](https://img.shields.io/badge/Signed-No-FF3333)
 ![Game Trackmania](https://img.shields.io/badge/Game-Trackmania-blue)
 
-# PluginTemplate
+# Quieter
 
-A template for writing plugins more easily.
+Lets you adjust the volume of anything.
 
 <!-- ![Signed](https://img.shields.io/badge/Signed-Yes-00AA00) -->
 <!-- ![Signed](https://img.shields.io/badge/Signed-School_Mode-CC1199) -->
