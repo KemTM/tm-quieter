@@ -1,5 +1,5 @@
 // c 2025-05-19
-// m 2025-05-19
+// m 2025-05-20
 
 class Sound {
     string      folder;
@@ -31,6 +31,10 @@ class Sound {
         set {
             if (sound !is null) {
                 sound.VolumedB = value;
+
+                if (value != defaultVolume) {
+                    choices[uid] = value;
+                }
             }
         }
     }
@@ -53,7 +57,7 @@ class Sound {
 
     ~Sound() {
         if (volume != _defaultVolume) {
-            Restore();
+            Restore(true);
         }
     }
 
@@ -73,7 +77,11 @@ class Sound {
         volume = -100.0f;
     }
 
-    void Restore() {
+    void Restore(bool destruct = false) {
         volume = _defaultVolume;
+
+        if (!destruct and choices.HasKey(uid)) {
+            choices.Remove(uid);
+        }
     }
 }

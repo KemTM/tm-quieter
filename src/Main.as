@@ -1,6 +1,8 @@
 // c 2025-05-19
-// m 2025-05-19
+// m 2025-05-20
 
+Json::Value@  choices     = Json::Object();
+const string  choicesFile = IO::FromStorageFolder("choices.json");
 const string  pluginColor = "\\$FAA";
 const string  pluginIcon  = Icons::Kenney::SoundOff;
 Meta::Plugin@ pluginMeta  = Meta::ExecutingPlugin();
@@ -19,6 +21,37 @@ void Main() {
     AddSoundsFromFolder("GameData/Vehicles/Media/Audio/Sound/Water", "Water");
 
     sounds.SortAsc();
+
+    yield();
+
+    if (IO::FileExists(choicesFile)) {
+        trace("loading choices");
+
+        try {
+            @choices = Json::FromFile(choicesFile);
+        } catch { }
+
+        if (choices !is null and choices.GetType() == Json::Type::Object) {
+            for (uint i = 0; i < sounds.Length; i++) {
+                if (choices.HasKey(sounds[i].uid)) {
+                    Json::Value@ choice = choices[sounds[i].uid];
+                    if (choice.GetType() == Json::Type::Number) {
+                        sounds[i].volume = float(choice);
+                    }
+                }
+            }
+        } else {
+            @choices = Json::Object();
+        }
+    }
+}
+
+void OnSettingsSave(Settings::Section&) {
+    trace("saving choices");
+
+    try {
+        Json::ToFile(choicesFile, choices, true);
+    } catch { }
 }
 
 void AddSoundsFromFolder(const string &in folderName, const string &in sourceName) {
