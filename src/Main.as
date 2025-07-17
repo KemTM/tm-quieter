@@ -12,6 +12,7 @@ Sound@[]      sounds;
 
 void Main() {
     AddSoundsFromFolder("GameData/Menu/Media/audio/Sound",           "Menu");
+    AddSoundsFromFolder("GameData/Stadium/Media/Audio",              "Stadium");
     AddSoundsFromFolder("GameData/Vehicles/Cars/CommonMedia/Audio",  "Common");
     AddSoundsFromFolder("GameData/Vehicles/Cars/CarDesert/Audio",    "CarDesert");
     AddSoundsFromFolder("GameData/Vehicles/Cars/CarRally/Audio",     "CarRally");
